@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports;
+using MarsQA.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -13,27 +15,41 @@ namespace MarsQA.Pages
     {
         public void LoginSteps(IWebDriver driver)
         {
+
+            ExtentReports rep = ExtentManager.getInstance();
+            ExtentTest test;
+
             try
             {
-            // launch Turnup portal
-            driver.Navigate().GoToUrl("http://localhost:5000/Home");
 
-            // click on "Sign In" link
-            driver.FindElement(By.LinkText("Sign In")).Click();
+                test = rep.CreateTest("Login Page");
 
-            // identify username  textbox and enter valid email address
-            IWebElement usernameTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[1]/input"));
-            usernameTextbox.SendKeys("donapathikunnel@gmail.com");
+                // launch Turnup portal
+                driver.Navigate().GoToUrl("http://localhost:5000/Home");
+                test.Log(Status.Info,"Mars portal Launched");
 
-            // identify password textbox and enter valid password
-            IWebElement passwordTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[2]/input"));
-            passwordTextbox.SendKeys("Testing!");
+                // click on "Sign In" link
+                driver.FindElement(By.LinkText("Sign In")).Click();
+                test.Log(Status.Info,"Navigated to Sign In Page");
 
-            // click on login button
-            IWebElement loginButton = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[4]/button"));
-            loginButton.Click();
+                // identify username  textbox and enter valid email address
+                IWebElement usernameTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[1]/input"));
+                usernameTextbox.SendKeys("donapathikunnel@gmail.com");
+                test.Log(Status.Info,"Username entered");
+
+                // identify password textbox and enter valid password
+                IWebElement passwordTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[2]/input"));
+                passwordTextbox.SendKeys("Testing!");
+                test.Log(Status.Info,"Password entered");
+
+                // click on login button
+                IWebElement loginButton = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[4]/button"));
+                loginButton.Click();
+                test.Log(Status.Info,"Sign in successful");
                 
-            Thread.Sleep(1000); 
+                Thread.Sleep(1000); 
+
+                rep.Flush();
             }
 
             catch (Exception ex)

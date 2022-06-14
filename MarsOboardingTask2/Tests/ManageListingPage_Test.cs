@@ -13,13 +13,14 @@ namespace MarsQA.Tests
     [TestFixture]
     internal class ManageListingPage_Test : CommmonDriver
     {
+        
+        ExtentReports rep = ExtentManager.getInstance();
 
         [Test,Order(1)]
         public void ShareSkill_Test()
         {
-
-            SellerListingPage sellerListingPageObj= new SellerListingPage();
-            sellerListingPageObj.ShareSkillsSteps(driver);
+            ShareListingPage shareListingPageObj = new ShareListingPage();
+            shareListingPageObj.ShareSkillsSteps(driver);
         }
 
 

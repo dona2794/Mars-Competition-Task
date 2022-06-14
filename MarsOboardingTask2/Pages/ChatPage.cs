@@ -38,9 +38,8 @@ namespace MarsQA.Pages
 
             catch(Exception ex)
             {
-             Assert.Fail("Mars ChatRoom page did not lanuch", ex.Message);
-             throw;
-                
+                Assert.Fail("Mars ChatRoom page did not lanuch", ex.Message);
+                throw;
             }
        }  
         public void SendMessage(IWebDriver driver, string message)
@@ -83,8 +82,8 @@ namespace MarsQA.Pages
 
             catch(Exception ex)
             {
-             Assert.Fail("Sending message failed", ex.Message);
-             throw;
+                Assert.Fail("Sending message failed", ex.Message);
+                throw;
                 
             }
         }   

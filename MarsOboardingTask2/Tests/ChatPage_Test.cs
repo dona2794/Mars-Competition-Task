@@ -1,4 +1,5 @@
-﻿using MarsQA.Pages;
+﻿using AventStack.ExtentReports;
+using MarsQA.Pages;
 using MarsQA.Utilities;
 using NUnit.Framework;
 using System;
@@ -12,6 +13,8 @@ namespace MarsQA.Tests
     [TestFixture]
     internal class ChatPage_Test : CommmonDriver
     {
+               
+        ExtentReports rep = ExtentManager.getInstance();
 
         [Test,Order(1)]
         public void ViewProfile_Test()

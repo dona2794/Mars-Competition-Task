@@ -1,4 +1,5 @@
-﻿using MarsQA.Utilities;
+﻿using AventStack.ExtentReports;
+using MarsQA.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
@@ -12,30 +13,41 @@ namespace MarsQA.Pages
 {
     internal class ProfilePage
     {
+        ExtentReports rep = ExtentManager.getInstance();
+        ExtentTest test;
+
         public void AddDescription(IWebDriver driver, string description )
         { 
             
+            test = rep.CreateTest("Add Description");
+            test.Log(Status.Info,"Test started");
+            
             // Identify description edit button and click on it
             IWebElement descriptionEditButton = driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/h3/span"));
-            descriptionEditButton.Click(); 
+            descriptionEditButton.Click();
 
             Thread.Sleep(2000);
 
             // Identify description textarea and enter valid details
-             IWebElement descriptionTextarea = driver.FindElement(By.Name("value"));
+            IWebElement descriptionTextarea = driver.FindElement(By.Name("value"));
             descriptionTextarea.Clear();
+            test.Log(Status.Info,"Description area cleared");
 
             Wait.WaitToBeClickable(driver,"XPath","//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/form/div/div/div[2]/button", 2);
 
             descriptionTextarea.SendKeys(description);
+            test.Log(Status.Info,"Description entered");
 
             //Click on save Button
             driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/form/div/div/div[2]/button")).Click();
             Thread.Sleep(2000);
+            test.Log(Status.Info,"Description saved");
 
             //Check if description is present in page
             IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/span"));
             Thread.Sleep(1000);
+
+            rep.Flush();
         }
     
         public string GetProfileDescription(IWebDriver driver)
@@ -46,16 +58,22 @@ namespace MarsQA.Pages
 
          public void AddLanguage(IWebDriver driver )
         { 
+
+            test = rep.CreateTest("Add Language");
+            test.Log(Status.Info,"Test started");
+
             //Identify language tab and click on it
             IWebElement languageTab=driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]"));
+            test.Log(Status.Info,"Language section launched");
 
             // click on add new button 
             IWebElement addNewButton = driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div"));
-             addNewButton.Click();
+            addNewButton.Click();
 
             //Identify language and enter valid details
             IWebElement addLanguageTextbox= driver.FindElement(By.Name("name"));
             addLanguageTextbox.SendKeys("English");
+            test.Log(Status.Info,"Language entered");
 
             
             //Identify language level dropdown and choose one
@@ -66,12 +84,17 @@ namespace MarsQA.Pages
 
             IWebElement fluentOption = driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[2]/select/option[2]"));
             fluentOption.Click();
+            test.Log(Status.Info,"Fluent option entered");
 
             Wait.WaitToBeClickable(driver,"XPath","//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]",3);
 
             // Click on add button
             IWebElement addButton= driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]"));
-            addButton.Click();        
+            addButton.Click(); 
+            test.Log(Status.Info,"Language saved");
+            test.Log(Status.Info,"Test passed");
+
+            rep.Flush();
          }
 
         public string GetActualLanguage(IWebDriver driver)
