@@ -12,9 +12,7 @@ namespace MarsQA.Tests
 {
     [TestFixture]
     internal class ManageListingPage_Test : CommmonDriver
-    {
-        
-        ExtentReports rep = ExtentManager.getInstance();
+    {       
 
         [Test,Order(1)]
         public void ShareSkill_Test()

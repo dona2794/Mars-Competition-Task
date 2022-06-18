@@ -1,21 +1,23 @@
 ﻿
 using AventStack.ExtentReports;
+using ExcelOperation;
 using MarsQA.Pages;
 using MarsQA.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Data;
 
 namespace MarsQA.Tests
 {
     [TestFixture]
     internal class ProfilePage_Test : CommmonDriver
-    {     
-       
+    {
 
 
-        [Test,Order(1)]
+
+        [Test, Order(1)]
         public void AddDescription_Test()
 
         {
@@ -25,11 +27,19 @@ namespace MarsQA.Tests
 
             //Profile page object initialization and definition
             ProfilePage profilePageObj = new ProfilePage();
-            profilePageObj.AddDescription(driver, "Test Analyst");
+
+            //Storing Excel data in to the in-memory collecation
+            ExcelData.PopulateInCollection(@"C:\TA Analyst\Mars-Competition-Task\MarsOboardingTask2\ExcelDataFile\Data.xlsx");
+
+            //Entering description using Column Name and Row number
+            for (int i = 1; i <= 2; i++)
+            {
+                profilePageObj.AddDescription(driver, ExcelData.ReadData(i, "Description"));
+            }
 
         }
 
-        [Test,Order(2)]
+        [Test, Order(2)]
         public void AddLanguage_Test()
         {
             //Home page object initialization and definition
@@ -42,18 +52,18 @@ namespace MarsQA.Tests
 
         }
 
-       /* [Test,Order(3)]
-        public void AddSkill_Test()
-        {
-            //Home page object initialization and definition
-            HomePage homePageObj = new HomePage();
-            homePageObj.GoToProfilePage(driver);
+        /* [Test,Order(3)]
+         public void AddSkill_Test()
+         {
+             //Home page object initialization and definition
+             HomePage homePageObj = new HomePage();
+             homePageObj.GoToProfilePage(driver);
 
-            //Profile page object initialization and definition
-            ProfilePage profilePageObj = new ProfilePage();
-            profilePageObj.AddSkill(driver);
+             //Profile page object initialization and definition
+             ProfilePage profilePageObj = new ProfilePage();
+             profilePageObj.AddSkill(driver);
 
-        }*/
+         }*/
 
     }
 }

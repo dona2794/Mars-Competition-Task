@@ -14,8 +14,6 @@ namespace MarsQA.Tests
     internal class ChatPage_Test : CommmonDriver
     {
                
-        ExtentReports rep = ExtentManager.getInstance();
-
         [Test,Order(1)]
         public void ViewProfile_Test()
         {

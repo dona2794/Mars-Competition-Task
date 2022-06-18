@@ -3,6 +3,7 @@ using MarsQA.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
+using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,15 +14,14 @@ namespace MarsQA.Pages
 {
     internal class LoginPage
     {
-        public void LoginSteps(IWebDriver driver)
-        {
+        public void LoginSteps(IWebDriver driver, string username, string password)
 
+        {
             ExtentReports rep = ExtentManager.getInstance();
             ExtentTest test;
 
             try
             {
-
                 test = rep.CreateTest("Login Page");
 
                 // launch Turnup portal
@@ -34,12 +34,12 @@ namespace MarsQA.Pages
 
                 // identify username  textbox and enter valid email address
                 IWebElement usernameTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[1]/input"));
-                usernameTextbox.SendKeys("donapathikunnel@gmail.com");
+                usernameTextbox.SendKeys(username);
                 test.Log(Status.Info,"Username entered");
 
                 // identify password textbox and enter valid password
                 IWebElement passwordTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[2]/input"));
-                passwordTextbox.SendKeys("Testing!");
+                passwordTextbox.SendKeys(password);
                 test.Log(Status.Info,"Password entered");
 
                 // click on login button
