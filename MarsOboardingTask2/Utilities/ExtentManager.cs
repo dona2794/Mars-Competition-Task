@@ -28,7 +28,7 @@ namespace MarsQA.Utilities
             {
                 //string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
                 // filePath = Directory.GetParent(Directory(filePath).FullName).FullName;
-                string reportPath = @"C:\TA Analyst\Mars-Competition-Task\MarsOboardingTask2\ExtentReports\Report.html";
+                string reportPath = @"C:\TA Analyst\Mars-Competition-Task\MarsOboardingTask2\ExtentReports\Reports.html";
                 //string reportFile = DateTime.Now.ToString().Replace("/","_").Replace(":","_");
                 htmlReporter = new ExtentHtmlReporter(reportPath);
                 extent = new ExtentReports();

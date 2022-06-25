@@ -15,8 +15,6 @@ namespace MarsQA.Tests
     internal class ProfilePage_Test : CommmonDriver
     {
 
-
-
         [Test, Order(1)]
         public void AddDescription_Test()
 
@@ -29,7 +27,7 @@ namespace MarsQA.Tests
             ProfilePage profilePageObj = new ProfilePage();
 
             //Storing Excel data in to the in-memory collecation
-            ExcelData.PopulateInCollection(@"C:\TA Analyst\Mars-Competition-Task\MarsOboardingTask2\ExcelDataFile\Data.xlsx");
+            ExcelData.PopulateInCollection(@"C:\TA Analyst\Mars-Competition-Task\MarsOboardingTask2\ExcelDataFile\Description.xlsx");
 
             //Entering description using Column Name and Row number
             for (int i = 1; i <= 2; i++)
@@ -48,7 +46,12 @@ namespace MarsQA.Tests
 
             //Profile page object initialization and definition
             ProfilePage profilePageObj = new ProfilePage();
-            profilePageObj.AddLanguage(driver);
+
+            //Storing Excel data in to the in-memory collecation
+            ExcelData.PopulateInCollection(@"C:\TA Analyst\Mars-Competition-Task\MarsOboardingTask2\ExcelDataFile\Language.xlsx");
+
+            //Entering language using Column Name and Row number
+            profilePageObj.AddLanguage(driver, ExcelData.ReadData(1, "Language"));
 
         }
 

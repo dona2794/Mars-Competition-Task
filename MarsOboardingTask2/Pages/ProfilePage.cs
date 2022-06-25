@@ -31,7 +31,7 @@ namespace MarsQA.Pages
             // Identify description textarea and enter valid details
             IWebElement descriptionTextarea = driver.FindElement(By.Name("value"));
             descriptionTextarea.Clear();
-            test.Log(Status.Info, "Description area cleared");
+            test.Log(Status.Info,"Description area cleared");
 
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/form/div/div/div[2]/button", 2);
 
@@ -50,13 +50,13 @@ namespace MarsQA.Pages
             rep.Flush();
         }
 
-        public string GetProfileDescription(IWebDriver driver)
+        public string GetProfileDescription(IWebDriver driver )
         {
             IWebElement createdDescription = driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/div/div/div/span"));
             return createdDescription.Text;
         }
 
-        public void AddLanguage(IWebDriver driver)
+        public void AddLanguage(IWebDriver driver, string language)
         {
 
             test = rep.CreateTest("Add Language");
@@ -72,7 +72,7 @@ namespace MarsQA.Pages
 
             //Identify language and enter valid details
             IWebElement addLanguageTextbox = driver.FindElement(By.Name("name"));
-            addLanguageTextbox.SendKeys("English");
+            addLanguageTextbox.SendKeys(language);
             test.Log(Status.Info, "Language entered");
 
 

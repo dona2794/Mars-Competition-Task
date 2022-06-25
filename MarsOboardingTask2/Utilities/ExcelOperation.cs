@@ -76,7 +76,7 @@ namespace ExcelOperation
 
                 return data.ToString();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return null;
             }
